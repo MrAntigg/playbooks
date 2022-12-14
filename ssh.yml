@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Add user user1 and generate for them an SSH key
+      user:
+        name: user1
+        home: /home/user1/
+        shell: /bin/bash
+
+    - name: create dir .ssh
+      file:
+        path: /home/user1/.ssh
+        state: directory
+
+    - name: copy ssh-key
+      copy:
+        src: /home/anti/share/ansible/ssh/id_rsa.pub
+        dest: /home/user1/.ssh/id_rsa.pub
+
+  

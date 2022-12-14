@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  tasks: 
+    - name: Update apt and install postfix
+      apt:
+        name: postfix
+        state: latest
+        update_cache: true
+      tags:
+        - init postfix
+
+    - name: start and enable postfix
+      service:
+        name: postfix
+        state: started
+        enabled: yes
+      tags: init postfix
+    
+    - name: remove postfix
+      apt:
+        name: postfix
+        state: absent
+      tags:
+        - drop postfix
